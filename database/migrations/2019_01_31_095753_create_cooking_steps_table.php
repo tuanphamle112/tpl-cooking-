@@ -15,9 +15,11 @@ class CreateCookingStepsTable extends Migration
     {
         Schema::create('cooking_steps', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->nullable();
             $table->integer('step_number')->unsigned();
             $table->integer('recipe_id')->unsigned();
             $table->text('content');
+            $table->integer('time')->nullable();
             $table->text('note')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();

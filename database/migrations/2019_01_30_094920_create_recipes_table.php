@@ -15,6 +15,7 @@ class CreateRecipesTable extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('recipe_number')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->integer('estimate_time')->unsigned();
@@ -24,7 +25,7 @@ class CreateRecipesTable extends Migration
             $table->integer('rating_point')->nullable()->unsigned();
             $table->integer('level_id')->unsigned();
             $table->integer('people_number')->unsigned();
-            $table->integer('status')->unsigned();
+            $table->integer('status')->unsigned()->default(0);
             $table->timestamps();
         });
     }

@@ -8,8 +8,8 @@ use App\Models\Ingredient;
 use App\Models\CookingStep;
 use App\Models\Category;
 
-trait RecipeRelation{
-
+trait RecipeRelation {
+    
   public function user()
   {
       return $this->belongsTo(User::class, 'user_id');
@@ -22,7 +22,7 @@ trait RecipeRelation{
 
   public function ingredient()
   {
-      return $this->hasMany(Ingredient::class, 'recipe_id');
+      return $this->hasOne(Ingredient::class, 'recipe_id');
   }
 
   public function cooking_step()

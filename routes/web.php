@@ -12,9 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('homepage');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+// admin route
+Route::group(['middleware'=>'admin', 'prefix'=>'admin'], function (){
+    Route::resource('users', 'Admin\UserController');
+    Route::resource('recipes', 'Admin\RecipeController');
+});

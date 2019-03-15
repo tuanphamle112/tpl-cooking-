@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
             'address'           =>  'So nha XXX, YYY, ZZZ',
             'remember_token'    =>  str_random(10),  
             'permission'        =>  1,
+            'gender'            =>  'male'
         ]);
         User::create([
             'name'              =>  'Khong phai admin',
@@ -26,6 +27,7 @@ class UsersTableSeeder extends Seeder
             'password'          =>  Hash::make('123456'),
             'remember_token'    =>  str_random(10),  
             'permission'        =>  2,
+            'gender'            =>  'male'    
         ]);
     }
 }

@@ -1,0 +1,20 @@
+{
+  "name": "tpl-cooking",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "https://github.com/tuanphamle112/tpl-cooking-",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "bootstrap": "^4.2.1",
+    "admin-lte": "adminlte#^2.4.8"
+  }
+}
