@@ -48,14 +48,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed',
+            'phone' => 'required|min:8|max:13'
+        ]);
         $userInfor = [
             'name'  => $request->name,
             'email' =>  $request->email,
             'phone' =>  $request->phone,
             'address'=> $request->address,
             'permission'=> $request->permission,
-            'gender'    => $request->gender,
-            'password'  =>  Hash::make($request->password)
+            'gender' => $request->gender,
+            'password' => Hash::make($request->password)
         ];
 
         $this->user->create($userInfor);

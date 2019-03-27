@@ -18,15 +18,8 @@
     display: block;
 }
 
-#img-upload{
-    width: 75%;
-    height: 300px;
-}
-.wrap-main-image {
-    text-align: center;
-}
 .wrap-main-image>.input-group {
-    width: 75%;
+    width: 100%;
     margin:auto;
 }
 .box-body>.wrap-create-form
@@ -74,7 +67,7 @@
     color: #7cb342 !important;
     border: 1px dashed #7cb342;
 }
-.wrap-create-form .ingredient-area .active
+.active
 {
     display:block !important;
 }
@@ -264,7 +257,7 @@
     .preview-images-zone {
         max-width: 582px;
         border: 1px solid #ddd;
-        /* display: flex; */
+        display: none;
         padding: 5px 5px 0px 5px;
         position: relative;
         overflow:auto;
@@ -357,11 +350,44 @@
 /* End upload image area */
 
 /* upload file styling */
-.fileContainer {
+.fileContainer, .mainFileContainer{
     overflow: hidden;
     position: relative;
 }
-
+.mainFileContainer [type=file]
+{
+    cursor: inherit;
+    display: block;
+    font-size: 999px;
+    filter: alpha(opacity=0);
+    min-height: 100%;
+    min-width: 100%;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+}
+.mainFileContainer 
+{
+    text-align: center;
+    background: #f3f3f3;
+    color: #fff;
+    border-radius: 10px;
+    width:100%;
+    cursor: pointer;
+    border:1px dashed #ccc;
+}
+.mainFileContainer i, .mainFileContainer span
+{
+    color: #ccccccb3;
+    font-size: 23px;
+}
+.mainFileContainer #img-upload
+{
+    /* width:100%; */
+    height: 200px;
+}
 .fileContainer [type=file] {
     cursor: inherit;
     display: block;

@@ -183,7 +183,7 @@
                       <td>{{ $recipe->estimate_time }}</td>
                       <td>{{ $recipe->description }}</td>
                       <td>{{ $recipe->image }}</td>
-                      <td>{{ $recipe->video }}</td>
+                      <td>{{ $recipe->video_link }}</td>
                       <td>{{ $recipe->rating_point }}</td>
                       <td>{{ $recipe->level->name }}</td>
                       <td>{{ $recipe->people_number }}</td>
@@ -191,7 +191,7 @@
                       <td><a href="{{ route('recipes.show',['id'=> $recipe->id]) }}">Detail</a></td>
                       <td><a href="{{ route('recipes.edit',['id'=> $recipe->id]) }}">Edit</a></td>
                       <td>
-                          <a href="#" class="delete-user">Delete</a>
+                          <a href="#" class="delete-recipe">Delete</a>
                           <form action="{{ route('recipes.destroy', $recipe->id) }}" method="post" style="display:none">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
@@ -222,5 +222,5 @@
 @section('script')
 
 @parent
-
+  <script src="{{ asset('js/admin/recipes/index.js') }}"></script>
 @endsection

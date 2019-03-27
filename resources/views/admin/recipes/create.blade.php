@@ -6,6 +6,8 @@
 @section('custom_css')
 
   <link rel="stylesheet" href="{{ asset('css/admin/recipes/create-recipe.css') }}">
+  <link href="{{ asset('bower/fine-uploader/dist/fine-uploader-new.css') }}" rel="stylesheet">
+  <link href="{{ asset('bower/fine-uploader/dist/fine-uploader-gallery.css') }}" rel="stylesheet">
 
 @endsection
 @section('content')
@@ -110,31 +112,30 @@
                     <form action="{{ route('recipes.store') }}" enctype="multipart/form-data" class="wrap-create-form" method="post">
                         {{ csrf_field() }}
                         <div class="form-group wrap-main-image">
-                            <label><b>Upload Main Image</b></label>
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                    <span class="btn btn-default btn-file">
-                                        Browse… <input type="file" name="main_image" id="imgInp">
-                                    </span>
-                                </span>
-                                <input type="text" class="form-control" readonly>
-                            </div>
-                            <img id='img-upload'/>
+                        <div class="input-group">
+                            <label class="mainFileContainer">
+                                <i class="fa fa-camera"></i>
+                                <span>Click to add a main picture</span>
+                                <img id="img-upload" alt="">
+                                <input type="file" id="imgInp" class="pro-image" name="main_image" class="form-control" >
+                            </label>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group recipe-name">
                             <label for="name">Recipe's name:</label>
-                            <input type="text" class="form-control" placeholder="Recipe's name" name="name">
+                            <input type="text" class="form-control input-error" placeholder="Recipe's name" name="name">
+                            <div class="filling-error"></div>
                         </div>
                         <input type="hidden"  name="recipe_number" value="{{ time() }}">
-                        <div class="form-group">
+                        <div class="form-group recipe-description">
                             <label for="description">Short description:</label>
-                            <textarea type="text" class="form-control" name="description" placeholder="Your short description here..." rows="6"></textarea>
+                            <textarea type="text" class="form-control input-error" name="description" placeholder="Your short description here..." rows="6"></textarea>
+                            <div class="filling-error"></div>
                         </div>
                         <div class="form-group" style="width: 30%">
                             <label for="video">Video(Youtube code/link):</label>
                             <input type="text" class="form-control"  placeholder="Youtube link here" name="video">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group recipe-estimate-number">
                             <label for="gender">Level, estimate time and number of people:</label><br>
                             <select class="form-control" name="level" style="width:30%; display:inline">
                                 <option value='1'>Easy</option>
@@ -234,21 +235,6 @@
                                     <div class="text-gray text-italic text-small" style="text-align:center">(Giới hạn <span class="text-highlight ng-binding">6</span> hình ảnh)</div>
                                 </fieldset>
                                 <div class="preview-images-zone">
-                                    <!-- <div class="preview-image preview-show-1">
-                                        <div class="image-cancel" data-no="1">x</div>
-                                        <div class="image-zone"><img id="pro-img-1" src="https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA5Ny85NTkvb3JpZ2luYWwvc2h1dHRlcnN0b2NrXzYzOTcxNjY1LmpwZw=="></div>
-                                        <div class="tools-edit-image"><a href="javascript:void(0)" data-no="1" class="btn btn-light btn-edit-image">edit</a></div>
-                                    </div>
-                                    <div class="preview-image preview-show-2">
-                                        <div class="image-cancel" data-no="2">x</div>
-                                        <div class="image-zone"><img id="pro-img-2" src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg"></div>
-                                        <div class="tools-edit-image"><a href="javascript:void(0)" data-no="2" class="btn btn-light btn-edit-image">edit</a></div>
-                                    </div>
-                                    <div class="preview-image preview-show-3">
-                                        <div class="image-cancel" data-no="3">x</div>
-                                        <div class="image-zone"><img id="pro-img-3" src="http://i.stack.imgur.com/WCveg.jpg"></div>
-                                        <div class="tools-edit-image"><a href="javascript:void(0)" data-no="3" class="btn btn-light btn-edit-image">edit</a></div>
-                                    </div> -->
                                 </div>
                             </div>
                           </div>
@@ -264,6 +250,8 @@
                           <input type="submit" class="btn btn-success form-control" value="Create Recipe">
                         </div>
                     </form>
+                    
+
                 </div>
               <!-- /.box-body -->
             </div>

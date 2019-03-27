@@ -49,16 +49,15 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        
-
-
-        
         // upload file
-        $ImageStorageFolder = "recipe".$request->recipe_number;        
+        $mainImageName = "";
+        $ImageStorageFolder = "recipe".$request->recipe_number;     
 
-        $mainImageName = time().$request->main_image->getClientOriginalName();
-
-        Storage::disk('public_uploads')->put($ImageStorageFolder."/".$mainImageName,file_get_contents($request->main_image -> getRealPath()));
+        if(!is_null($request->main_image))
+        {
+            $mainImageName = time().$request->main_image->getClientOriginalName();
+            Storage::disk('public_uploads')->put($ImageStorageFolder."/".$mainImageName,file_get_contents($request->main_image -> getRealPath()));
+        };
         $stepInsert = [];
 
         for($i = 1; $i <= $request->step_num; $i++)
@@ -67,6 +66,7 @@ class RecipeController extends Controller
             $stepName = "step".$i;
             $stepArrayImageName = "";
             $stepArray = $request->$stepName; // include content, time, note, name of each step
+           
             foreach($request->$stepFileName as $file)
             {
                 $stepImageName = time().$file->getClientOriginalName();
@@ -96,11 +96,8 @@ class RecipeController extends Controller
             'name'  => $request->ingredients
         ];
 
-        // $recipe = $this->recipe->find(17);
-
         $recipe = $this->recipe->create($recipes);
         $recipe->ingredient()->create($ingredient);
-        // dd($stepInsert);
         $recipe->cooking_step()->createMany($stepInsert);
 
         dd("success");
@@ -148,6 +145,13 @@ class RecipeController extends Controller
      */
     public function destroy($id)
     {
+        $recipe = $this->recipe->find($id);
+
+        Storage::disk('public_uploads')->deleteDirectory("recipe".$recipe->recipe_number);
+
         $this->recipe->destroy($id);
+
+        return redirect()->route("recipes.index");
     }
 }
+

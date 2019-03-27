@@ -90,7 +90,7 @@
               <div class="box-header">
                 <h3 class="box-title">User list</h3>
                 <div class="insert-button">
-                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createUser">Create new user</button>
+                  <button type="button" class="btn btn-success btn-insert" data-toggle="modal" data-target="#createUser">Create new user</button>
                 </div>
                 <!-- Modal insert user -->
                 <div class="modal fade" id="createUser" role="dialog">
@@ -101,22 +101,31 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                       </div>
                       <div class="modal-body">
+                      @if ($errors->any())
+                          <div class="filling-error error-exist">
+                              <ul>
+                                  @foreach ($errors->all() as $error)
+                                      <li>{{ $error }}</li>
+                                  @endforeach
+                              </ul>
+                          </div>
+                      @endif
                       <form action="{{ route('users.store') }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
-                          <label for="name">Name:</label>
+                          <label for="name">Name <span style="color: red;">*</span></label>
                           <input type="text" class="form-control" name="name">
                         </div>
                         <div class="form-group">
-                          <label for="email">Email address:</label>
+                          <label for="email">Email address <span style="color: red;">*</span></label>
                           <input type="email" class="form-control" name="email">
                         </div>
                         <div class="form-group">
-                          <label for="phone">Phone:</label>
+                          <label for="phone">Phone</label>
                           <input type="text" class="form-control" name="phone">
                         </div>
                         <div class="form-group">
-                          <label for="gender">Gender:</label>
+                          <label for="gender">Gender</label>
                           <select class="form-control" name="gender">
                             <option value='male'>Male</option>
                             <option value='female'>Female</option>
@@ -128,25 +137,24 @@
                           <input type="text" class="form-control" name="address">
                         </div>
                         <div class="form-group">
-                          <label for="phone">Permission:</label>
+                          <label for="phone">Permission</label>
                           <select class="form-control" name="permission">
                             <option value='1'>Admin</option>
                             <option value='2'>User</option>
                           </select>
                         </div>
                         <div class="form-group">
-                          <label for="pwd">Password:</label>
+                          <label for="pwd">Password <span style="color: red;">*</span></label>
                           <input type="password" class="form-control" name="password">
                         </div>
                         <div class="form-group">
-                          <label for="repwd">Confirm password:</label>
-                          <input type="password" class="form-control" name="re-password">
+                          <label for="repwd">Confirm password <span style="color: red;">*</span></label>
+                          <input type="password" class="form-control" name="password_confirmation">
                         </div>
                         <button type="submit" class="btn btn-success">Create User</button>
                       </form>
                       </div>
                     </div>
-                    
                   </div>
                 </div>
                 <!-- End modal insert user -->
@@ -222,14 +230,5 @@
 @section('script')
 
 @parent
-
-<script>
-  $('.delete-user').click(function(e){
-      e.preventDefault() // Don't post the form, unless confirmed
-      if (confirm('Do you want to delete this user?')) {
-          // Post the form
-          $(e.target).next('form').submit() // Post the surrounding form
-      }
-  });
-</script>
+  <script src="{{ asset('js/admin/users/index.js') }}"></script>
 @endsection

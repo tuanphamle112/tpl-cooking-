@@ -66,7 +66,7 @@ return [
         //My manual disc created to upload directly to public folder
         'public_uploads' => [
             'driver' => 'local',
-            'root'   => public_path() . '/uploads',
+            'root'   => public_path() . '/uploads/recipes',
         ],
 
     ],

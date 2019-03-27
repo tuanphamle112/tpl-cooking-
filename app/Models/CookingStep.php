@@ -9,6 +9,7 @@ class CookingStep extends Model
     use CookingStepRelation;
 
     protected $fillable = [
+        'name',
         'step_number',
         'recipe_id',
         'content',

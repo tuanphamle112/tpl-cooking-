@@ -23,14 +23,18 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(
-            'App\Constracts\Eloquent\UserRepository',
-            'App\Repositories\Eloquent\UserRepositoryEloquent'
-        );
+        $models = [
+            'User',
+            'Recipe'
+        ];
+        
+        foreach($models as $model)
+        {
+            $this->app->singleton(
+                "App\Constracts\Eloquent\\{$model}Repository",
+                "App\Repositories\Eloquent\\{$model}RepositoryEloquent"
+            );
+        }
 
-        $this->app->singleton(
-            'App\Constracts\Eloquent\RecipeRepository',
-            'App\Repositories\Eloquent\RecipeRepositoryEloquent'
-        );
     }
 }

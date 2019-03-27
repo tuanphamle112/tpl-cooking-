@@ -27,7 +27,7 @@
                     <!-- Logo -->
                     <a href="index2.html" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini"><b>A</b>LT</span>
+                    <span class="logo-mini"><b>T</b>PL</span>
                     <!-- logo for regular state and mobile devices -->
                     <span class="logo-lg"><b>Admin</b>TPL Cooking</span>
                     </a>
@@ -115,7 +115,7 @@
                             <li><a href="{{ route('recipes.index')}}">Danh sách công thức</a></li>
                         </ul>
                         </li>
-                        <li class="treeview">
+                        <li class="active">
                         <a href="{{ route('users.index') }}"><i class="fa fa-link"></i> <span>Quản lý người dùng</span>
                         </a>
                         </li>
@@ -147,7 +147,6 @@
             <script src="{{ asset('bower/bootstrap/dist/js/bootstrap.min.js') }}"></script>
             <!-- AdminLTE App -->
             <script src="{{ asset('bower/admin-lte/dist/js/adminlte.min.js') }}"></script>
-
 
         @show
     </body>
