@@ -143,6 +143,7 @@
     .step-box .step-count {
         display: block;
         float: left;
+        font-weight: bold;
         padding: 6px;
         text-align: center;
         background: #c70808;
@@ -254,10 +255,24 @@
 /* End step area */
 
 /* Upload image area */
+    .btn-delete-all-image
+    {
+        padding: 0px 6px;
+        float: right;
+        margin-bottom: 20px;
+    }
+    .btn-delete-all-image span
+    {
+        font-size: 13px;
+    }
+    .wrap-preview
+    {
+        display: none;
+    }
     .preview-images-zone {
         max-width: 582px;
         border: 1px solid #ddd;
-        display: none;
+        /* display: none; */
         padding: 5px 5px 0px 5px;
         position: relative;
         overflow:auto;

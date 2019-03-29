@@ -180,25 +180,34 @@
                     <tr>
                       <td>{{ $recipe->id }}</td>
                       <td>{{ $recipe->name }}</td>
-                      <td>{{ $recipe->estimate_time }}</td>
+                      <td>{{ $recipe->estimate_time }} <span>hours</span></td>
                       <td>{{ $recipe->description }}</td>
                       <td>{{ $recipe->image }}</td>
                       <td>{{ $recipe->video_link }}</td>
                       <td>{{ $recipe->rating_point }}</td>
                       <td>{{ $recipe->level->name }}</td>
                       <td>{{ $recipe->people_number }}</td>
-                      <td>{{ $recipe->status }}</td>
+                      @if($recipe->status == config('manual.recipe_status.pendding'))
+                        <td><span class="label-status label-warning">Pendding</span></td>
+                      @elseif($recipe->status == config('manual.recipe_status.actived'))
+                        <td><span class="label-status label-success">Actived</span></td>
+                      @else
+                        <td><span class="label-status label-danger">Reject</span></td>
+                      @endif
+                      
                       <td><a href="{{ route('recipes.show',['id'=> $recipe->id]) }}">Detail</a></td>
                       <td><a href="{{ route('recipes.edit',['id'=> $recipe->id]) }}">Edit</a></td>
                       <td>
-                          <a href="#" class="delete-recipe">Delete</a>
-                          <form action="{{ route('recipes.destroy', $recipe->id) }}" method="post" style="display:none">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                            <div class="form-group">
-                              <input type="submit" class="btn btn-danger" value="Delete user">
-                            </div>
-                          </form>
+                        <a href="javascript:void(0)" data-text="{{ __('Do you want to delete this recipe?') }}" class="delete">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                        <form action="{{ route('recipes.destroy', $recipe->id) }}" method="post" style="display:none">
+                          {{ csrf_field() }}
+                          {{ method_field('DELETE') }}
+                          <div class="form-group">
+                            <input type="submit" class="btn btn-danger" value="Delete user">
+                          </div>
+                        </form>
                       </td>
                     </tr>
                   @endforeach

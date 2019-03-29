@@ -49,14 +49,14 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
+
         // upload file
         $mainImageName = "";
         $ImageStorageFolder = "recipe".$request->recipe_number;     
-
         if(!is_null($request->main_image))
         {
             $mainImageName = time().$request->main_image->getClientOriginalName();
-            Storage::disk('public_uploads')->put($ImageStorageFolder."/".$mainImageName,file_get_contents($request->main_image -> getRealPath()));
+            // Storage::disk('public_uploads')->put($ImageStorageFolder."/".$mainImageName,file_get_contents($request->main_image -> getRealPath()));
         };
         $stepInsert = [];
 
@@ -66,18 +66,30 @@ class RecipeController extends Controller
             $stepName = "step".$i;
             $stepArrayImageName = "";
             $stepArray = $request->$stepName; // include content, time, note, name of each step
-           
+            $fileCount = 0;
             foreach($request->$stepFileName as $file)
             {
-                $stepImageName = time().$file->getClientOriginalName();
-                Storage::disk('public_uploads')->put($ImageStorageFolder."/".$stepFileName."/".$stepImageName,file_get_contents($file -> getRealPath()));
+                $fileCount++;
+
+                if($fileCount <= 6)
+                {
+                    $stepImageName = time().$file->getClientOriginalName();
+                    Storage::disk('public_uploads')->put($ImageStorageFolder."/".$stepFileName."/".$stepImageName,file_get_contents($file -> getRealPath()));
+                    
+                    $stepArrayImageName = $stepArrayImageName.",".$stepImageName;
+                }
+                else
+                {
+                    break;
+                }
                 
-                $stepArrayImageName = $stepArrayImageName.",".$stepImageName;
             }
-            $stepArray['image'] = $stepArrayImageName;
+            $stepArray['image'] = ltrim($stepArrayImageName, ',');
             $stepArray['step_number'] = $i;
             array_push($stepInsert, $stepArray);
         }
+        // dd($request->$stepFileName);
+
         // end upload file
 
         $recipes = [
@@ -100,7 +112,12 @@ class RecipeController extends Controller
         $recipe->ingredient()->create($ingredient);
         $recipe->cooking_step()->createMany($stepInsert);
 
-        dd("success");
+        $notification = array(
+            'message' => 'Create recipe successfully!', 
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('recipes.index')->with($notification);
     }
 
     /**
@@ -151,7 +168,12 @@ class RecipeController extends Controller
 
         $this->recipe->destroy($id);
 
-        return redirect()->route("recipes.index");
+        $notification = array(
+            'message' => 'Delete recipe successfully!', 
+            'alert-type' => 'warning'
+        );
+
+        return redirect()->route("recipes.index")->with($notification);
     }
 }
 

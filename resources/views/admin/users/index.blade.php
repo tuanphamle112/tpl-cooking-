@@ -187,7 +187,7 @@
                       <td>{{ $user->name }}</td>
                       <td>{{ $user->email }}</td>
                       <td>{{ $user->phone }}</td>
-                      <td>{{ $user->address }}</td>
+                      <td>{{ $user->address }}</td>z
                       @if($user->permission == config('manual.permission.admin'))
                       <td>Admin</td>
                       @else
@@ -196,7 +196,12 @@
                       <td>{{ $user->gender }}</td>
                       <td><a href="{{ route('users.edit',['id'=> $user->id]) }}">Edit</a></td>
                       <td>
-                          <a href="#" class="delete-user">Delete</a>
+                          <!-- <a href="#" class="delete-user">Delete</a> -->
+                          @if ($user->id != Auth::user()->id)
+                              <a href="javascript:void(0)" data-text="{{ __('Do you want to delete this user?') }}" class="delete">
+                                  <i class="fa fa-trash-o"></i>
+                              </a>
+                          @endif
                           <form action="{{ route('users.destroy', $user->id) }}" method="post" style="display:none">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}

@@ -2,6 +2,10 @@
 
 @section('title', 'Update Users')
 
+@section('custom_css')
+  <link rel="stylesheet" href="{{ asset('css/admin/users/update-user.css') }}">
+@endsection
+
 @section('content')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -26,7 +30,6 @@
           <div class="small-box bg-aqua">
             <div class="inner">
               <h3>1500</h3>
-
               <p>Người truy cập</p>
             </div>
             <div class="icon">
@@ -89,6 +92,15 @@
             <div class="box">
                 <h5>Update User Information : </h5>
                 <div class="wrap-form-update">
+                    @if ($errors->any())
+                        <div class="filling-error error-exist">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="{{ route('users.update', $user->id) }}" method="post">
                         @method('PUT')
                         {{ csrf_field() }}

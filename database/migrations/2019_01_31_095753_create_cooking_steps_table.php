@@ -18,7 +18,7 @@ class CreateCookingStepsTable extends Migration
             $table->string('name')->nullable();
             $table->integer('step_number')->unsigned();
             $table->integer('recipe_id')->unsigned();
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->integer('time')->nullable();
             $table->text('note')->nullable();
             $table->string('image')->nullable();

@@ -23,7 +23,6 @@ $(document).ready( function() {
             var reader = new FileReader();
             
             reader.onload = function (e) {
-                console.log(e.target.result);
                 $('#img-upload').attr('src', e.target.result);
             }
             
@@ -68,6 +67,12 @@ $(document).ready( function() {
     }
 
     $(".wrap-create-form").submit(function(e){
+        var stepContentLength = $(".step-content").length;
+        for (var i = 0; i < stepContentLength - 1;i++)
+        {
+
+        }
+
         if(allIngredients.length == 0)
         {
             e.preventDefault();
@@ -155,13 +160,10 @@ $(document).ready( function() {
            $(this).removeAttr("disabled");
         }
     });
-
     var step_num = 0;
     var step_div = $('.wrap-step-box').html(); // get div step as a string to append
-
     $('.add-more-btn').click(function (){
         step_num++;
-
         var mapObj = {
             stepCount : step_num,
             stepContent : "step"+ step_num +"[content]",
@@ -185,18 +187,20 @@ $(document).ready( function() {
     
     // $( ".preview-images-zone" ).sortable();
     
-    $(document).on('click', '.image-cancel', function() {
-        let no = $(this).data('no');
-        $(".preview-image.preview-show-"+no).remove();
+    $(document).on('click', '.btn-delete-all-image', function() {
+        $(this).parent('.step-box').remove();
+        step_num--;
     });
 
 });
 // Image js
-var num = 1;
 function readImage() {
+    var num = 1;
+
     if (window.File && window.FileList && window.FileReader) {
         var files = event.target.files; //FileList object
         var output = $(event.target).closest(".wrap-upload-image").find(".preview-images-zone");
+        output.html("");
         for (let i = 0; i < files.length; i++) {
 
             var file = files[i];
@@ -207,19 +211,20 @@ function readImage() {
             
             picReader.addEventListener('load', function (event) {
                 var picFile = event.target;
-
+                
                 var html =  '<div class="preview-image preview-show-' + num + '">' +
-                            '<div class="image-cancel" data-no="' + num + '">x</div>' +
                             '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result + '"></div>' +
                             '</div>';
-                output.append(html);
+                if(num <= 6)
+                {
+                    output.append(html);
+                }
                 num = num + 1;
             });
-            // num = num + 1;
+            
             picReader.readAsDataURL(file);
-            $('.preview-images-zone').attr('style', 'display:block;');
+            $('.wrap-preview').attr('style', 'display:block;');
         }
-
         $("#pro-image").val('');
     } else {
         console.log('Browser not support');

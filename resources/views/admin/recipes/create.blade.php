@@ -4,11 +4,7 @@
 @section('title', 'Manage Users')
 
 @section('custom_css')
-
   <link rel="stylesheet" href="{{ asset('css/admin/recipes/create-recipe.css') }}">
-  <link href="{{ asset('bower/fine-uploader/dist/fine-uploader-new.css') }}" rel="stylesheet">
-  <link href="{{ asset('bower/fine-uploader/dist/fine-uploader-gallery.css') }}" rel="stylesheet">
-
 @endsection
 @section('content')
   <!-- Content Wrapper. Contains page content -->
@@ -199,45 +195,52 @@
                         <div class="wrap-step-box">
 
                         <div class="step-box">
-                            <!-- <a href="javascript:void(0)" class="btn btn-danger btn-close"><span class="fa fa-trash"></span></a> -->
-                            <div class="step-count">stepCount</div>
-                            <input type="hidden" name="step_number" value="stepCount">
-                            <div class="step-direction">
-                                <textarea rows="4" cols="40" name="stepContent" class="form-control ng-pristine ng-untouched ng-valid ng-isolate-scope ng-empty" placeholder="Nhập hướng dẫn cách làm cho bước 1"></textarea>
+                          <a href="javascript:void(0)" data-no="stepCount" class="btn btn-danger btn-close btn-delete-all-image"><span class="fa fa-trash"></span></a>
+                          <div class="step-count">stepCount</div>
+                          <input type="hidden" name="step_number" value="stepCount">
+                          <div class="step-direction">
+                            <textarea rows="4" cols="40" name="stepContent" class="form-control step-content" placeholder="Nhập hướng dẫn cách làm cho bước 1"></textarea>
+                            <div class="filling-error">
+                              <span>Please fill recipe's step instruction</span><br>
                             </div>
-                            <div class="step-acts">
-                                <a href="javascript:void(0)" class="btn-show-opts">
-                                    <span class="fa fa-plus"></span> <strong>Thông tin thêm</strong> <em>(thời gian bước thực hiện, tên bước, mẹo nhỏ,...)</em>
-                                </a>
-                                <div class="step-opts">
-                                    <div class="step-opt">
-                                        <span class="step-tip-ico fa fa-info-circle"></span> 
-                                        <input type="text" name="stepName" placeholder="Tên bước thực hiện (nếu có)" class="ng-pristine ng-untouched ng-valid ng-empty">
-                                    </div>
-                                    <div class="step-opt">
-                                        <span class="step-tip-ico fa fa-clock-o"></span>
-                                        <input style="width:100px; text-align:center" name="stepTime" type="text" placeholder="Thời gian" class="ng-pristine ng-untouched ng-valid ng-empty"> phút
-                                    </div>
-                                    <div class="step-opt" style="clear:both; margin-top:6px;">
-                                        <span class="step-tip" title="Mẹo thực hiện món ăn ngon hơn">
-                                            <span class="step-tip-ico fa fa-lightbulb-o"></span>
-                                        </span>
-                                        <input type="text" placeholder="Mẹo nhỏ cho bước này" name="stepNote" class="ng-pristine ng-untouched ng-valid ng-empty">
-                                    </div>
+                          </div>
+                          <div class="step-acts">
+                            <a href="javascript:void(0)" class="btn-show-opts">
+                                <span class="fa fa-plus"></span> <strong>Thông tin thêm</strong> <em>(thời gian bước thực hiện, tên bước, mẹo nhỏ,...)</em>
+                            </a>
+                            <div class="step-opts">
+                                <div class="step-opt">
+                                    <span class="step-tip-ico fa fa-info-circle"></span> 
+                                    <input type="text" name="stepName" placeholder="Tên bước thực hiện (nếu có)" class="ng-pristine ng-untouched ng-valid ng-empty">
                                 </div>
-                            </div>
-                            <div class="wrap-upload-image">
-                                <fieldset class="form-group">
-                                    <label class="fileContainer">
-                                        Add pictures
-                                        <input type="file" onchange="readImage(this)" class="pro-image" name="stepFile" class="form-control" multiple>
-                                    </label>
-                                    <div class="text-gray text-italic text-small" style="text-align:center">(Giới hạn <span class="text-highlight ng-binding">6</span> hình ảnh)</div>
-                                </fieldset>
-                                <div class="preview-images-zone">
+                                <div class="step-opt">
+                                    <span class="step-tip-ico fa fa-clock-o"></span>
+                                    <input style="width:100px; text-align:center" name="stepTime" type="text" placeholder="Thời gian" class="ng-pristine ng-untouched ng-valid ng-empty"> phút
+                                </div>
+                                <div class="step-opt" style="clear:both; margin-top:6px;">
+                                    <span class="step-tip" title="Mẹo thực hiện món ăn ngon hơn">
+                                        <span class="step-tip-ico fa fa-lightbulb-o"></span>
+                                    </span>
+                                    <input type="text" placeholder="Mẹo nhỏ cho bước này" name="stepNote" class="ng-pristine ng-untouched ng-valid ng-empty">
                                 </div>
                             </div>
                           </div>
+                          <div class="wrap-upload-image">
+                              <fieldset class="form-group">
+                                  <label class="fileContainer">
+                                      Add pictures
+                                      <input type="file" onchange="readImage(this)" class="pro-image" name="stepFile" class="form-control" multiple>
+                                  </label>
+                                  <div class="text-gray text-italic text-small" style="text-align:center">(Giới hạn <span class="text-highlight ng-binding">6</span> hình ảnh)</div>
+                                  <div class="text-gray text-italic text-small" style="text-align:center">Giữ phím <span class="text-highlight ng-binding">Ctrl</span> để chọn nhiều ảnh</div>
+                              </fieldset>
+                              <div class="wrap-preview">
+                                <div class="preview-images-zone">
+                                </div>
+                              </div>
+
+                          </div>
+                        </div>
 
                         </div>
                         <input type="hidden" class="step-num" name="step_num">

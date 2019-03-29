@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="{{ asset('css/admin/custom.css') }}">
         <!-- Google Font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        
+        <link rel="stylesheet" href="{{ asset('bower/toastr/toastr.min.css') }}">
         @yield('custom_css')
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
@@ -147,6 +149,32 @@
             <script src="{{ asset('bower/bootstrap/dist/js/bootstrap.min.js') }}"></script>
             <!-- AdminLTE App -->
             <script src="{{ asset('bower/admin-lte/dist/js/adminlte.min.js') }}"></script>
+            
+            <script src="{{ asset('js/admin/custom.js') }}"></script>
+            <script src="{{ asset('bower/toastr/toastr.js') }}"></script>
+
+            <script>
+                @if(Session::has('message'))
+                var type = "{{ Session::get('alert-type', 'info') }}";
+                switch(type){
+                    case 'info':
+                        toastr.info("{{ Session::get('message') }}","Infor Alert", {timeOut: 8000});
+                        break;
+                    
+                    case 'warning':
+                        toastr.warning("{{ Session::get('message') }}","Warning Alert", {timeOut: 8000});
+                        break;
+
+                    case 'success':
+                        toastr.success("{{ Session::get('message') }}","Success Alert", {timeOut: 8000});
+                        break;
+
+                    case 'error':
+                        toastr.error("{{ Session::get('message') }}","Error Alert", {timeOut: 8000});
+                        break;
+                }
+                @endif
+                </script>
 
         @show
     </body>

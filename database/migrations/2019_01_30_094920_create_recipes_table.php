@@ -20,7 +20,7 @@ class CreateRecipesTable extends Migration
             $table->string('name');
             $table->integer('estimate_time')->unsigned();
             $table->text('description')->nullable();
-            $table->string('image')->nullable();
+            $table->text('image')->nullable();
             $table->string('video_link')->nullable();
             $table->integer('rating_point')->nullable()->unsigned();
             $table->integer('level_id')->unsigned();

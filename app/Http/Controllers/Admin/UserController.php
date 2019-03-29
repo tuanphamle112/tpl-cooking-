@@ -52,7 +52,7 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed',
-            'phone' => 'required|min:8|max:13'
+            'phone' => 'required|min:8|max:13',
         ]);
         $userInfor = [
             'name'  => $request->name,
@@ -66,7 +66,12 @@ class UserController extends Controller
 
         $this->user->create($userInfor);
         
-        return 'Create successfully';
+        $notification = array(
+            'message' => 'Update user successfully!', 
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('users.index')->with($notification);
     }
 
     /**
@@ -89,7 +94,6 @@ class UserController extends Controller
     public function edit($id)
     {
         $users = $this->user->find($id);
-
         return view('admin.users.update', ['user' => $users]);
     }
 
@@ -102,11 +106,22 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'phone' => 'min:8|max:13'
+        ]);
+
         $this->user
             ->find($id)
             ->update($request->all());
 
-        return 'update success';
+        $notification = array(
+            'message' => 'Update user successfully!', 
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('users.index')->with($notification);
     }
 
     /**
@@ -119,6 +134,11 @@ class UserController extends Controller
     {
         $this->user->destroy($id);
 
-        return redirect()->back();
+        $notification = array(
+            'message' => 'Delete user successfully!', 
+            'alert-type' => 'warning'
+        );
+
+        return redirect()->route('users.index')->with($notification);
     }
 }
