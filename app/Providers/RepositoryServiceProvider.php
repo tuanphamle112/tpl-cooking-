@@ -25,9 +25,10 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $models = [
             'User',
-            'Recipe'
+            'Recipe',
+            'Level'
         ];
-        
+
         foreach($models as $model)
         {
             $this->app->singleton(
@@ -35,6 +36,5 @@ class RepositoryServiceProvider extends ServiceProvider
                 "App\Repositories\Eloquent\\{$model}RepositoryEloquent"
             );
         }
-
     }
 }

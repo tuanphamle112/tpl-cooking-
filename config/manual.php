@@ -6,8 +6,13 @@ return [
         'user' => 2
     ],
     'recipe_status' => [
-        'pendding' => 0,
-        'actived' => 1,
-        'rejected' => 2
+        'Pending' => 0,
+        'Actived' => 1,
+        'Rejected' => 2
     ],
+    'pagination' => [
+        'default' => 2,
+        'user' => 2,
+        'recipe' => 2
+    ]
 ];

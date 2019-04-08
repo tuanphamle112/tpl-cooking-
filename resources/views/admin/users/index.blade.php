@@ -187,7 +187,7 @@
                       <td>{{ $user->name }}</td>
                       <td>{{ $user->email }}</td>
                       <td>{{ $user->phone }}</td>
-                      <td>{{ $user->address }}</td>z
+                      <td>{{ $user->address }}</td>
                       @if($user->permission == config('manual.permission.admin'))
                       <td>Admin</td>
                       @else
@@ -212,8 +212,9 @@
                       </td>
                     </tr>
                   @endforeach
-
+                  
                 </table>
+                {{ $users->links() }}
               </div>
               <!-- /.box-body -->
             </div>

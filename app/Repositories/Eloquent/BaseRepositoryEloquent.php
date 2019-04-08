@@ -11,9 +11,14 @@ class BaseRepositoryEloquent implements BaseRepository {
         $model = $this->model;
     }
 
-    public function all()
+    public function all($with = [], $select = null)
     {
-        return $this->model->all();
+        return $this->model->with($with)->get($select);
+    }
+
+    public function paginate($paginate, $with = [])
+    {
+        return $this->model->with($with)->paginate($paginate);
     }
 
     public function create($data = [])

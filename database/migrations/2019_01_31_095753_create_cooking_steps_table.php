@@ -21,7 +21,7 @@ class CreateCookingStepsTable extends Migration
             $table->text('content')->nullable();
             $table->integer('time')->nullable();
             $table->text('note')->nullable();
-            $table->string('image')->nullable();
+            $table->text('image')->nullable();
             $table->timestamps();
 
             $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');;

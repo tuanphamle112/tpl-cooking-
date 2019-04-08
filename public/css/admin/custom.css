@@ -27,3 +27,7 @@
     vertical-align: baseline;
     border-radius: .25em;
 }
+.pagination
+{
+    margin:auto !important;
+}

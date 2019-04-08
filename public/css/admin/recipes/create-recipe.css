@@ -255,23 +255,18 @@
 /* End step area */
 
 /* Upload image area */
-    .btn-delete-all-image
+    .btn-delete-step
     {
         padding: 0px 6px;
         float: right;
         margin-bottom: 20px;
     }
-    .btn-delete-all-image span
+    .btn-delete-step span
     {
         font-size: 13px;
     }
-    .wrap-preview
-    {
-        display: none;
-    }
     .preview-images-zone {
         max-width: 582px;
-        border: 1px solid #ddd;
         /* display: none; */
         padding: 5px 5px 0px 5px;
         position: relative;
@@ -337,7 +332,11 @@
     .container {
         padding-top: 50px;
     }
-
+    .wrap-preview .button-clear
+    {
+        display: none;
+        float: right;
+    }
     .wrap-upload-image .step-photo-upload-btn {
         margin-top: 8px;
         text-align: right;
@@ -438,3 +437,20 @@
     cursor: pointer;
 }
 /* end upload file styling */
+
+.picture-overlay {
+    width: 240px;
+    height: 26px;
+    border: 1px solid #00000000;
+    margin: auto;
+    position: absolute;
+    margin-top: -26px;
+    margin-left: 252px;
+    border-radius: 20px;
+    background-color: #ccccccab;
+    display: none;
+}
+.submit-button
+{
+    margin-top:15px;
+}

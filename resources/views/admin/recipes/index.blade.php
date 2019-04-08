@@ -161,11 +161,12 @@
                 </div>
               </div>
               <!-- /.box-header -->
-              <div class="box-body table-responsive no-padding">
-                <table class="table table-hover">
+              <div class="box-body table-responsive">
+                <table class="table table-bordered table-hover">
                   <tr>
                     <th>ID</th>
                     <th>Recipe Name</th>
+                    <th>Recipe Number</th>
                     <th>Estimated time</th>
                     <th>Description</th>
                     <th>Image link</th>
@@ -180,6 +181,7 @@
                     <tr>
                       <td>{{ $recipe->id }}</td>
                       <td>{{ $recipe->name }}</td>
+                      <td>{{ $recipe->recipe_number }}</td>
                       <td>{{ $recipe->estimate_time }} <span>hours</span></td>
                       <td>{{ $recipe->description }}</td>
                       <td>{{ $recipe->image }}</td>
@@ -187,9 +189,10 @@
                       <td>{{ $recipe->rating_point }}</td>
                       <td>{{ $recipe->level->name }}</td>
                       <td>{{ $recipe->people_number }}</td>
-                      @if($recipe->status == config('manual.recipe_status.pendding'))
+
+                      @if($recipe->status == config('manual.recipe_status.Pendding'))
                         <td><span class="label-status label-warning">Pendding</span></td>
-                      @elseif($recipe->status == config('manual.recipe_status.actived'))
+                      @elseif($recipe->status == config('manual.recipe_status.Actived'))
                         <td><span class="label-status label-success">Actived</span></td>
                       @else
                         <td><span class="label-status label-danger">Reject</span></td>
@@ -218,6 +221,8 @@
             </div>
             <!-- /.box -->
           </div>
+          {{ $recipes->links() }}
+
           <!-- end content -->
       </div>
 
